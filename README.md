@@ -11,6 +11,17 @@ This project is an [MCP (Model Context Protocol)](https://github.com/modelcontex
 - Written in Go for performance and portability
 - Easily extensible to support more DataGovMy datasets
 
+## Available Tools
+
+This MCP server currently exposes the following tools:
+
+- **births**: Number of people born daily in Malaysia, based on registrations with JPN from 1920 to the present.
+- **fuelprice**: Weekly retail prices of RON95 petrol, RON97 petrol, and diesel in Malaysia.
+- **population_malaysia**: Population at national level from 1970 to 2024, by sex, age group and ethnicity.
+- **population_state**: Population at state level from 1970 to 2024, by sex, age group and ethnicity.
+
+Want to add more tools? Contributions are welcome! Please open an issue or submit a pull request if you'd like to help extend the server with additional DataGovMy datasets or features.
+
 ## What is DataGovMy?
 
 [DataGovMy](https://github.com/datagovmy/data) is Malaysia's open data platform, providing datasets on demographics, economics, health, and more. This MCP server makes those datasets accessible to AI agents and developer tools.
@@ -91,7 +102,7 @@ You can configure Cline (and Cursor) to launch this MCP server as a subprocess a
 4. **Use Cline or Cursor to access DataGovMy tools.**
    - Example usage:
 
-     ```
+     ```text
      Use the "population_malaysia" tool from the "datagovmy" server with age="overall", date="2024-01-01", ethnicity="overall", sex="both".
      ```
 
