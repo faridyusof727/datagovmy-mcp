@@ -41,8 +41,19 @@ func LoadTools() map[*mcp.Tool]server.ToolHandlerFunc {
 		),
 	)
 
+	births := mcp.NewTool("births",
+		mcp.WithDescription("Number of people born daily in Malaysia, based on registrations with JPN from 1920 to the present"),
+		mcp.WithString("date",
+			mcp.Description("Date of birth in YYYY-MM-DD format; note that this date represents the actual date of birth and NOT the date of registration with JPN"),
+		),
+		mcp.WithNumber("births",
+			mcp.Description("Number of births for the date"),
+		),
+	)
+
 	return map[*mcp.Tool]server.ToolHandlerFunc{
 		&populationState:    populationStateHandler,
 		&populationMalaysia: populationMalaysiaHandler,
+		&births:             birthHandler,
 	}
 }
