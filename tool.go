@@ -51,9 +51,20 @@ func LoadTools() map[*mcp.Tool]server.ToolHandlerFunc {
 		),
 	)
 
+	fuelprice := mcp.NewTool("fuelprice",
+		mcp.WithDescription("Weekly retail prices of RON95 petrol, RON97 petrol, and diesel in Malaysia"),
+		mcp.WithString("date",
+			mcp.Description("The date of effect of the price, in YYYY-MM-DD format. You can omit this field if not found any data"),
+		),
+		mcp.WithString("series_type",
+			mcp.Description("Price in RM (level), or weekly change in RM (change_weekly)."),
+		),
+	)
+
 	return map[*mcp.Tool]server.ToolHandlerFunc{
 		&populationState:    populationStateHandler,
 		&populationMalaysia: populationMalaysiaHandler,
 		&births:             birthHandler,
+		&fuelprice:          fuelpriceHandler,
 	}
 }
