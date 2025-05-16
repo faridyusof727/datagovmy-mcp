@@ -1,6 +1,6 @@
 # MCP Server for DataGovMy
 
-This project is an [MCP (Model Context Protocol)](https://github.com/modelcontextprotocol) server written in Go that exposes tools and resources from [DataGovMy](https://github.com/datagovmy/data) — Malaysia's open government data platform. It allows you to access Malaysian government datasets (such as population statistics) programmatically via Cline (an AI agent) and Cursor (an AI-powered code editor).
+This project is an [MCP (Model Context Protocol)](https://github.com/modelcontextprotocol) server written in Go that exposes tools and resources from [DataGovMy](https://github.com/data-gov-my) — Malaysia's open government data platform. It allows you to access Malaysian government datasets (such as population statistics) programmatically via Cline (an AI agent) and Cursor (an AI-powered code editor).
 
 ![Show](show.gif)
 
