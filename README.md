@@ -19,6 +19,7 @@ This MCP server currently exposes the following tools:
 - **fuelprice**: Weekly retail prices of RON95 petrol, RON97 petrol, and diesel in Malaysia.
 - **population_malaysia**: Population at national level from 1970 to 2024, by sex, age group and ethnicity.
 - **population_state**: Population at state level from 1970 to 2024, by sex, age group and ethnicity.
+- **registration_transactions_car**: Car registration transactions from 2000 to the present. Filter by registration date, type (motokar, MPV, jeep, pick-up, window van), maker, model, colour, fuel type (petrol, diesel, green diesel, natural gas, LNG, hydrogen, electric, hybrid), and state of registration.
 
 Want to add more tools? Contributions are welcome! Please open an issue or submit a pull request if you'd like to help extend the server with additional DataGovMy datasets or features.
 

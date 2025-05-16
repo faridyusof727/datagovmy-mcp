@@ -2,12 +2,14 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"net/url"
 	"strings"
 
+	"encoding/csv"
 	"github.com/mark3labs/mcp-go/mcp"
 )
 
@@ -214,4 +216,112 @@ func fuelpriceHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.Ca
 	}
 
 	return mcp.NewToolResultText(string(body)), nil
+}
+
+func registrationTransactionsCarHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	const csvURL = "https://storage.data.gov.my/transportation/cars_2025.csv"
+
+	// Download the CSV file
+	resp, err := http.Get(csvURL)
+	if err != nil {
+		return nil, fmt.Errorf("failed to download CSV file: %v", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected status code when downloading CSV: %d", resp.StatusCode)
+	}
+
+	// Parse the CSV in a streaming fashion (row by row)
+	reader := csv.NewReader(resp.Body)
+	header, err := reader.Read()
+	if err != nil {
+		return nil, fmt.Errorf("failed to read CSV header: %v", err)
+	}
+	colIdx := make(map[string]int)
+	for i, col := range header {
+		colIdx[col] = i
+	}
+
+	// Get filter params
+	args := request.Params.Arguments
+	getStr := func(key string) string {
+		if v, ok := args[key].(string); ok {
+			return v
+		}
+		return ""
+	}
+	dateReg := getStr("date_reg")
+	dateStart := getStr("date_start")
+	dateEnd := getStr("date_end")
+	typ := getStr("type")
+	maker := getStr("maker")
+	model := getStr("model")
+	colour := getStr("colour")
+	fuel := getStr("fuel")
+	state := getStr("state")
+
+	// Helper for date range
+	inDateRange := func(date string) bool {
+		if dateStart != "" && date < dateStart {
+			return false
+		}
+		if dateEnd != "" && date > dateEnd {
+			return false
+		}
+		return true
+	}
+
+	// Stream and filter rows
+	var filtered [][]string
+	for {
+		row, err := reader.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return nil, fmt.Errorf("failed to read CSV row: %v", err)
+		}
+		if dateReg != "" && row[colIdx["date_reg"]] != dateReg {
+			continue
+		}
+		if typ != "" && row[colIdx["type"]] != typ {
+			continue
+		}
+		if maker != "" && row[colIdx["maker"]] != maker {
+			continue
+		}
+		if model != "" && row[colIdx["model"]] != model {
+			continue
+		}
+		if colour != "" && row[colIdx["colour"]] != colour {
+			continue
+		}
+		if fuel != "" && row[colIdx["fuel"]] != fuel {
+			continue
+		}
+		if state != "" && row[colIdx["state"]] != state {
+			continue
+		}
+		if (dateStart != "" || dateEnd != "") && !inDateRange(row[colIdx["date_reg"]]) {
+			continue
+		}
+		filtered = append(filtered, row)
+	}
+
+	// Prepend header if any results
+	var result [][]string
+	if len(filtered) > 0 {
+		result = append(result, header)
+		result = append(result, filtered...)
+	} else {
+		result = [][]string{header}
+	}
+
+	jsonBytes, err := json.Marshal(result)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal rows to JSON: %v", err)
+	}
+
+	return mcp.NewToolResultText(string(jsonBytes)), nil
 }

@@ -60,11 +60,25 @@ func LoadTools() map[*mcp.Tool]server.ToolHandlerFunc {
 			mcp.Description("Price in RM (level), or weekly change in RM (change_weekly)."),
 		),
 	)
+	registrationTransactionsCar := mcp.NewTool("registration_transactions_car",
+		mcp.WithDescription("Car registration transactions from 2000 to the present"),
+		mcp.WithString("date_reg", mcp.Description("The date of registration of the vehicle in YYYY-MM-DD format; please note that this date may not be the same as the date of purchase")),
+		mcp.WithString("date_start", mcp.Description("For date range and the start date of registration of the vehicle in YYYY-MM-DD format; please note that this date may not be the same as the date of purchase")),
+		mcp.WithString("date_end", mcp.Description("For date range and the end date of registration of the vehicle in YYYY-MM-DD format; please note that this date may not be the same as the date of purchase")),
+		mcp.WithString("date_reg", mcp.Description("The date of registration of the vehicle in YYYY-MM-DD format; please note that this date may not be the same as the date of purchase")),
+		mcp.WithString("type", mcp.Description("One of 5 vehicle types classed under as Cars for the purpose of analysis, namely motorcars ('motokar'), MPVs ('motokar_pelbagai_utiliti'), jeeps ('jip'), pick-up trucks ('pick_up') and window vans ('window_van')")),
+		mcp.WithString("maker", mcp.Description("Maker of the vehicle (e.g. Perodua, Proton, Toyota) in upper-case text")),
+		mcp.WithString("model", mcp.Description("Model of the vehicle (e.g. Bezza (Perodua), Saga (Proton), City (Honda)) in upper-case text")),
+		mcp.WithString("colour", mcp.Description("Colour of the car in lower-case English text; please note these are broadly defined colours which do not distinguish between shades of the same colour (e.g. light blue and dark blue are both classed as blue)")),
+		mcp.WithString("fuel", mcp.Description("Fuel used by the car's engine(s); there are 7 types, namely petrol ('petrol'), diesel ('diesel'), green diesel ('greendiesel'), natural gas ('ng'), liquefied natural gas ('lng'), hydrogen ('hydrogen'), and electricity ('electric'). Cars which can run on electricity or fuel are classed as hybrid (either 'hybrid_petrol' or 'hybrid_diesel'). Combinations of two fuels indicate that the car's engine can use more than one type of fuel; for instance, 'diesel_ng' means the car's engine can use both diesel and natural gas as fuel.")),
+		mcp.WithString("state", mcp.Description("One of 16 states, or 'Rakan Niaga'; this either indicates the state of the JPJ office the car was registered at, or that the car was registered through an official JPJ partner portal ('Rakan Niaga'). Please note that this data field has no relation to the car's number plate, which may be freely chosen with no dependence on where the car was registered.")),
+	)
 
 	return map[*mcp.Tool]server.ToolHandlerFunc{
-		&populationState:    populationStateHandler,
-		&populationMalaysia: populationMalaysiaHandler,
-		&births:             birthHandler,
-		&fuelprice:          fuelpriceHandler,
+		&populationState:             populationStateHandler,
+		&populationMalaysia:          populationMalaysiaHandler,
+		&births:                      birthHandler,
+		&fuelprice:                   fuelpriceHandler,
+		&registrationTransactionsCar: registrationTransactionsCarHandler,
 	}
 }
