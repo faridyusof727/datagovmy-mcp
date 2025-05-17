@@ -161,6 +161,9 @@ The server is now modularized for easier extension. To add a new DataGovMy tool:
 
 This modular structure makes it easy to add, update, or debug individual tools without affecting others.
 
+**Tip for contributors:**  
+When implementing new tools or handlers, refer to the [DataGovMy Developer Portal](https://developer.data.gov.my/) for guidance on API request structure, available endpoints, and best practices.
+
 ## Troubleshooting
 
 - **Port already in use:** Change the port in the code or stop the conflicting process.
