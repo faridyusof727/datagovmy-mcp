@@ -5,6 +5,9 @@ import (
 	"github.com/mark3labs/mcp-go/server"
 )
 
+// LoadTools returns a map of predefined MCP tools with their corresponding handler functions.
+// Each tool represents a specific dataset or service with configurable parameters.
+// The returned map can be used to register and manage different data retrieval tools.
 func LoadTools() map[*mcp.Tool]server.ToolHandlerFunc {
 	populationMalaysia := mcp.NewTool("population_malaysia",
 		mcp.WithDescription("Population at national level from 1970 to 2024, by sex, age group and ethnicity"),
