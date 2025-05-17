@@ -17,5 +17,6 @@ func LoadTools() map[*mcp.Tool]server.ToolHandlerFunc {
 		&births:                      birthHandler,
 		&fuelprice:                   fuelpriceHandler,
 		&registrationTransactionsCar: registrationTransactionsCarHandler,
+		&hhIncome:                    hhIncomeHandler,
 	}
 }
