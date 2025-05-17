@@ -16,7 +16,7 @@ This project is an [MCP (Model Context Protocol)](https://github.com/modelcontex
 This repository provides an MCP (Model Context Protocol) server that acts as an interface to connect to the [data.gov.my](https://data.gov.my/) API (where available). It is designed for MCP integration and is not specific to any single assistant or application.
 
 - **Why Go?**  
-  You might be wondering why this project uses Go instead of the official MCP package in Node.js. The answer is simple: I know Go better, it has fewer dependencies, and I can easily release binaries for different operating systems.
+  You might be wondering why this project uses Go instead of the [official MCP package](https://github.com/modelcontextprotocol/typescript-sdk) in Node.js. The answer is simple: I know Go better, it has fewer dependencies, and I can easily release binaries for different operating systems.
 
 - **No vector database, custom LLM training, or RAG:**  
   This project does not use any kind of vector database, custom large language model training, or retrieval-augmented generation (RAG). It is purely an MCP server that exposes DataGovMy datasets as tools for AI agents and developer tools.
