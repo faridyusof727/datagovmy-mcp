@@ -143,9 +143,23 @@ You can configure Cline (and Cursor) to launch this MCP server as a subprocess a
 
 ## Extending the Server
 
-- Add new DataGovMy tools by editing `tool.go` and `handlers.go`.
-- Register new endpoints and update the MCP tool schema as needed.
-- Rebuild and restart the server to apply changes.
+The server is now modularized for easier extension. To add a new DataGovMy tool:
+
+1. **Create a new file in the `tools/` directory** (e.g., `tools/my_new_tool.go`).
+   - Define your tool using `mcp.NewTool` and implement its handler function in this file.
+   - See existing files in `tools/` (like `births.go`, `population_malaysia.go`) for examples.
+
+2. **Register your tool and handler** in `tools/tool.go`:
+   - Import your new tool and handler at the top if needed.
+   - Add an entry to the map returned by `LoadTools()`:
+
+     ```go
+     &myNewTool: myNewToolHandler,
+     ```
+
+3. **Rebuild and restart the server** to apply your changes.
+
+This modular structure makes it easy to add, update, or debug individual tools without affecting others.
 
 ## Troubleshooting
 
