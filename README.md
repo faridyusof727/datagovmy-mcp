@@ -23,6 +23,18 @@ This MCP server currently exposes the following tools:
 
 Want to add more tools? Contributions are welcome! Please open an issue or submit a pull request if you'd like to help extend the server with additional DataGovMy datasets or features.
 
+## Download
+
+You can download the latest release for Windows, macOS, or Linux from the [GitHub Releases page](https://github.com/faridyusof727/datagovmy-mcp/releases).
+
+1. Go to the [Releases page](https://github.com/faridyusof727/datagovmy-mcp/releases).
+2. Find the version you want (e.g., `v1.0.0`).
+3. Download the binary for your operating system:
+   - `*_windows_amd64.zip` for Windows
+   - `*_darwin_amd64.tar.gz` for macOS
+   - `*_linux_amd64.tar.gz` for Linux
+4. Extract the downloaded file and follow the usage instructions.
+
 ## What is DataGovMy?
 
 [DataGovMy](https://github.com/datagovmy/data) is Malaysia's open data platform, providing datasets on demographics, economics, health, and more. This MCP server makes those datasets accessible to AI agents and developer tools.
