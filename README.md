@@ -11,6 +11,16 @@ This project is an [MCP (Model Context Protocol)](https://github.com/modelcontex
 - Written in Go for performance and portability
 - Easily extensible to support more DataGovMy datasets
 
+## About This Project
+
+This repository provides an MCP (Model Context Protocol) server that acts as an interface to connect to the [data.gov.my](https://data.gov.my/) API (where available). It is designed for MCP integration and is not specific to any single assistant or application.
+
+- **No vector database, custom LLM training, or RAG:**  
+  This project does not use any kind of vector database, custom large language model training, or retrieval-augmented generation (RAG). It is purely an MCP server that exposes DataGovMy datasets as tools for AI agents and developer tools.
+
+- **Upcoming DataGovMy Assistant:**  
+  The DataGovMy team is working on a ChatGPT-style assistant, [MyDataGPT](https://github.com/data-gov-my/datagovmy-ai?tab=readme-ov-file#mydatagpt-assistant-coming-soon-), which will provide a conversational interface to Malaysian government data. This MCP server is a separate project focused on MCP integration.
+
 ## Available Tools
 
 This MCP server currently exposes the following tools:
